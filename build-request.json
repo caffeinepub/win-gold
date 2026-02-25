@@ -1,0 +1,46 @@
+{
+  "kind": "build_request",
+  "title": "Retry: Simulated OTP Verification in Signup/Login Flow",
+  "projectName": "Gaming Wallet App",
+  "priority": "high",
+  "requirements": [
+    {
+      "id": "REQ-14",
+      "text": "In LoginSignup.tsx, implement a simulated OTP verification step in the signup and login flow. After the user enters their mobile number and taps Continue, generate a random 6-digit OTP in component state, display it visibly on screen in a styled gold info box (e.g., 'Your OTP is: XXXXXX — for demo purposes'), and render a numeric input field for the user to enter the OTP. Store the OTP and its expiry timestamp (5 minutes from generation) in React component state only — do not persist to the backend. Only advance to account creation (new user) or home screen (returning user) after the entered OTP exactly matches the generated one. If the OTP does not match, show a clear inline error message. After 3 failed attempts, invalidate the OTP and require the user to restart. On successful match, invalidate the OTP immediately.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-6",
+          "msg-7"
+        ],
+        "quotes": [
+          "Otp sing up system",
+          "Ha fi r se try"
+        ]
+      },
+      "acceptanceCriteria": [
+        "After entering a valid mobile number and tapping Continue, a 6-digit OTP is generated and displayed on screen in a styled info box.",
+        "An OTP input field is shown for the user to type the received code.",
+        "The OTP and its 5-minute expiry are stored only in React component state — no backend calls for OTP.",
+        "If the entered OTP matches the generated one, the flow proceeds to name entry (new user) or home (returning user).",
+        "If the OTP is wrong, a clear error message is shown below the input.",
+        "After 3 failed attempts, the OTP is invalidated and the user is asked to restart the flow.",
+        "After a successful OTP match, the OTP is immediately invalidated so it cannot be reused."
+      ]
+    }
+  ],
+  "constraints": [
+    "OTP logic must be entirely client-side — do not store OTPs in the backend.",
+    "Do not modify any files under frontend/src/hooks/ or frontend/src/components/ui.",
+    "All changes must be confined to frontend/src/components/LoginSignup.tsx."
+  ],
+  "nonGoals": [
+    "Real SMS delivery of OTP — this is a simulated/demo flow only.",
+    "Backend OTP storage or validation.",
+    "Changes to any game screens, payment page, or other app sections."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

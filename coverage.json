@@ -1,0 +1,34 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-25T13:50:00.142Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 1,
+    "implemented": 0,
+    "items": [
+      {
+        "id": "REQ-14",
+        "summary": "In LoginSignup.tsx, implement a simulated OTP verification step in the signup and login flow. After the user enters their mobile number and taps Continue, generate a random 6-digit OTP in component state, display it visibly on screen in a styled gold info box (e.g., 'Your OTP is: XXXXXX — for demo purposes'), and render a numeric input field for the user to enter the OTP. Store the OTP and its expiry timestamp (5 minutes from generation) in React component state only — do not persist to the backend. Only advance to account creation (new user) or home screen (returning user) after the entered OTP exactly matches the generated one. If the OTP does not match, show a clear inline error message. After 3 failed attempts, invalidate the OTP and require the user to restart. On successful match, invalidate the OTP immediately.",
+        "status": "missing",
+        "plannedFiles": [
+          "frontend/src/components/LoginSignup.tsx"
+        ],
+        "matchedFiles": []
+      }
+    ]
+  },
+  "changedFiles": [
+    "build-request.json",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

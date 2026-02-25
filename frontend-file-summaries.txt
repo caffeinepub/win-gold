@@ -1,0 +1,3 @@
+{
+  "frontend/src/components/LoginSignup.tsx": "Login/signup component with a 4-step flow (auth → mobile → otp → name). After entering a mobile number, a simulated 6-digit OTP is generated and displayed on-screen in a styled gold info box; the user must enter it correctly to proceed (with 3-attempt limit, 5-minute expiry, and a Resend OTP option), after which the existing login/register backend calls execute as before."
+}

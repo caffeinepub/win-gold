@@ -1,0 +1,27 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Simulated OTP Verification in Signup/Login Flow",
+  "requirements": [
+    {
+      "id": "REQ-14",
+      "summary": "Implement simulated OTP verification in LoginSignup.tsx with component-state-only storage, 6-digit OTP display, input validation, retry limits, and expiry handling",
+      "acceptanceCriteria": [
+        "After entering a valid mobile number and tapping Continue, a 6-digit OTP is generated and displayed on screen in a styled info box.",
+        "An OTP input field is shown for the user to type the received code.",
+        "The OTP and its 5-minute expiry are stored only in React component state — no backend calls for OTP.",
+        "If the entered OTP matches the generated one, the flow proceeds to name entry (new user) or home (returning user).",
+        "If the OTP is wrong, a clear error message is shown below the input.",
+        "After 3 failed attempts, the OTP is invalidated and the user is asked to restart the flow.",
+        "After a successful OTP match, the OTP is immediately invalidated so it cannot be reused."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/LoginSignup.tsx",
+          "operation": "modify",
+          "description": "Add OTP verification step after mobile number submission: generate random 6-digit OTP in component state, store OTP with 5-minute expiry timestamp, display OTP in a styled gold info box (e.g., 'Your OTP is: XXXXXX — for demo purposes'), render numeric OTP input field, validate entered OTP against generated one, show inline error on mismatch, track failed attempts (max 3), invalidate OTP after 3 failures or successful match, proceed to registration or home screen on success. All OTP logic remains client-side only in React state—no backend persistence."
+        }
+      ]
+    }
+  ]
+}

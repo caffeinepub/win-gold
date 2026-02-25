@@ -1,0 +1,184 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 9,
+  "summary": "Gaming Wallet App with Gold & Dark Blue theme. Features: Header with Avatar/VIP level, blinking wallet balance (₹50 welcome bonus), ADD CASH button; Dynamic scrolling banner with offers; Game grid (Dragon vs Tiger, 7 Up Down, Andar Bahar, Ludo, Mines, Crash) with profit/loss system; Bottom nav (Home, Activity, Refer & Earn, Support, Account); Payment page with UPI QR for 7073791055, amount selection (₹100/₹500/₹1000), UTR submission; Mobile number Signup/Login.",
+  "architectural_notes": [
+    "Gold & Dark Blue color theme throughout the app",
+    "UPI merchant number: 7073791055 — payments and QR linked to this number",
+    "Welcome bonus of ₹50 credited on signup"
+  ],
+  "known_issues": [
+    "Previous full build attempts failed — may need to be built in smaller incremental steps",
+    "Account creation fails after entering mobile number on signup screen",
+    "OTP signup build failed once — retry in progress"
+  ],
+  "isFixRequest": true,
+  "existing_features": [
+    {
+      "id": "feature-implement-mobile-number-based-signup-and-login-screens-as-the-app-entry-point-new-users-enter-their-mobile-number-and-a-name-to-register-returning-users-enter-their-mobile-number-to-log-in-on-first-login-credit-50-welcome-bonus-to-the-wallet-store-user-records-mobile-number-name-balance-vip-level-referral-code-in-the-backend",
+      "title": "Implement mobile number-based Signup and Login screens as the app entry point. New users enter their mobile number and a name to register; returning users enter their mobile number to log in. On first login, credit ₹50 welcome bonus to the wallet. Store user records (mobile number, name, balance, VIP level, referral code) in the backend.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-a-top-header-section-in-gold-and-dark-blue-theme-containing-left-circular-avatar-image-with-the-user-s-vip-level-label-vip-1-vip-2-etc-below-it-center-a-glowing-shimmering-wallet-balance-box-displaying-the-user-s-current-balance-in-right-a-blinking-yellow-add-cash-button-that-navigates-to-the-payment-page",
+      "title": "Build a top header section in Gold and Dark Blue theme containing: (Left) circular avatar image with the user's VIP level label (VIP 1, VIP 2, etc.) below it; (Center) a glowing/shimmering wallet balance box displaying the user's current balance in ₹; (Right) a blinking yellow 'ADD CASH' button that navigates to the payment page.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-auto-scrolling-banner-immediately-below-the-header-that-cycles-through-3-slides-slide-1-welcome-bonus-50-credited-start-playing-now-slide-2-deposit-offer-add-100-and-get-50-extra-total-150-250-signup-200-slide-3-withdraw-your-winnings-instantly-to-upi-the-banner-should-loop-automatically-every-3-seconds",
+      "title": "Add an auto-scrolling banner immediately below the header that cycles through 3 slides: Slide 1 — 'Welcome Bonus ₹50 Credited! Start Playing Now'; Slide 2 — 'DEPOSIT OFFER: Add ₹100 and Get ₹50 EXTRA (Total ₹150 | ₹250 Signup = ₹200)'; Slide 3 — 'Withdraw your winnings instantly to UPI'. The banner should loop automatically every 3 seconds.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-a-game-selection-grid-with-two-categories-a-multiplayer-games-dragon-vs-tiger-7-up-down-andar-bahar-b-skill-strategy-ludo-mines-crash-each-game-card-must-display-a-visually-rich-game-image-illustration-the-game-name-and-a-play-button-tapping-a-game-card-opens-that-game-s-play-screen",
+      "title": "Build a game selection grid with two categories: (A) Multiplayer Games — Dragon vs Tiger, 7 Up Down, Andar Bahar; (B) Skill & Strategy — Ludo, Mines, Crash. Each game card must display a visually rich game image/illustration, the game name, and a 'Play' button. Tapping a game card opens that game's play screen.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-individual-game-play-screens-for-all-6-games-dragon-vs-tiger-7-up-down-andar-bahar-ludo-mines-crash-each-game-must-have-a-functional-bet-placement-ui-where-the-user-selects-a-bet-amount-plays-a-round-and-the-result-is-a-win-or-loss-calculated-by-backend-logic-winnings-are-added-to-the-wallet-balance-losses-deduct-from-it-each-game-should-have-appropriate-gameplay-mechanics-dragon-vs-tiger-pick-dragon-or-tiger-random-result-7-up-down-bet-on-dice-sum-being-under-7-exactly-7-or-over-7-andar-bahar-pick-andar-or-bahar-ludo-simplified-roll-and-move-mines-pick-tiles-avoid-mines-crash-cash-out-before-multiplier-crashes",
+      "title": "Implement individual game play screens for all 6 games (Dragon vs Tiger, 7 Up Down, Andar Bahar, Ludo, Mines, Crash). Each game must have a functional bet placement UI where the user selects a bet amount, plays a round, and the result is a win or loss calculated by backend logic. Winnings are added to the wallet balance; losses deduct from it. Each game should have appropriate gameplay mechanics: Dragon vs Tiger (pick Dragon or Tiger, random result), 7 Up Down (bet on dice sum being under 7, exactly 7, or over 7), Andar Bahar (pick Andar or Bahar), Ludo (simplified roll-and-move), Mines (pick tiles, avoid mines), Crash (cash out before multiplier crashes).",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-bottom-navigation-bar-with-5-tabs-1-home-shows-the-main-game-grid-2-activity-shows-daily-check-in-bonus-feature-3-refer-earn-displays-the-user-s-unique-referral-link-code-and-referral-rewards-info-4-support-a-message-chat-support-screen-for-payment-issues-5-account-shows-withdrawal-history-and-settings",
+      "title": "Add a bottom navigation bar with 5 tabs: (1) Home — shows the main game grid; (2) Activity — shows daily check-in bonus feature; (3) Refer & Earn — displays the user's unique referral link/code and referral rewards info; (4) Support — a message/chat support screen for payment issues; (5) Account — shows withdrawal history and settings.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-add-cash-payment-page-opened-via-the-add-cash-button-it-must-have-step-1-amount-selector-with-preset-options-100-500-1000-step-2-display-the-uploaded-phonepe-qr-code-image-from-the-user-s-uploaded-screenshot-and-merchant-number-7073791055-step-3-a-text-input-for-the-user-to-enter-their-12-digit-utr-number-after-paying-step-4-a-submit-button-that-saves-the-deposit-request-to-the-backend-for-admin-review-and-shows-a-confirmation-message-to-the-user",
+      "title": "Build the Add Cash payment page (opened via the ADD CASH button). It must have: Step 1 — amount selector with preset options ₹100, ₹500, ₹1000; Step 2 — display the uploaded PhonePe QR code image (from the user's uploaded screenshot) and merchant number 7073791055; Step 3 — a text input for the user to enter their 12-digit UTR number after paying; Step 4 — a Submit button that saves the deposit request to the backend for admin review and shows a confirmation message to the user.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-consistent-gold-and-dark-blue-visual-theme-across-the-entire-app-dark-navy-dark-blue-backgrounds-gold-amber-accent-colors-for-buttons-borders-and-highlights-white-text-for-readability-use-a-bold-premium-typography-style-consistent-with-gaming-casino-apps-ensure-the-layout-feels-like-a-mobile-app-max-width-container-centered-full-height-screens",
+      "title": "Apply a consistent Gold and Dark Blue visual theme across the entire app: dark navy/dark blue backgrounds, gold/amber accent colors for buttons, borders, and highlights, white text for readability. Use a bold, premium typography style consistent with gaming/casino apps. Ensure the layout feels like a mobile app (max-width container centered, full-height screens).",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-debug-and-fix-the-signup-flow-in-loginsignup-tsx-so-that-after-a-user-enters-their-mobile-number-and-name-the-account-is-successfully-created-in-the-backend-ensure-the-registeruser-or-equivalent-backend-call-completes-without-error-the-50-welcome-bonus-is-credited-and-the-user-is-redirected-to-the-home-screen-add-clear-inline-error-messages-in-the-ui-if-registration-fails-describing-the-issue-to-the-user",
+      "title": "Debug and fix the signup flow in LoginSignup.tsx so that after a user enters their mobile number and name, the account is successfully created in the backend. Ensure the registerUser (or equivalent) backend call completes without error, the ₹50 welcome bonus is credited, and the user is redirected to the Home screen. Add clear inline error messages in the UI if registration fails, describing the issue to the user.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-simulated-otp-verification-step-in-the-signup-login-flow-in-loginsignup-tsx-after-the-user-enters-their-mobile-number-and-taps-continue-generate-a-6-digit-otp-simulated-no-real-sms-display-it-on-screen-e-g-your-otp-is-xxxxxx-in-a-styled-info-box-for-demo-purposes-and-show-a-new-input-field-for-the-user-to-enter-the-otp-only-proceed-to-account-creation-or-login-after-the-entered-otp-matches-the-generated-one-show-a-clear-error-message-if-the-otp-is-wrong-the-otp-should-expire-or-be-invalidated-after-a-successful-match-or-after-3-failed-attempts",
+      "title": "Add a simulated OTP verification step in the signup/login flow in LoginSignup.tsx. After the user enters their mobile number and taps Continue, generate a 6-digit OTP (simulated — no real SMS), display it on-screen (e.g., 'Your OTP is: XXXXXX' in a styled info box for demo purposes), and show a new input field for the user to enter the OTP. Only proceed to account creation or login after the entered OTP matches the generated one. Show a clear error message if the OTP is wrong. The OTP should expire or be invalidated after a successful match or after 3 failed attempts.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-store-the-generated-otp-and-its-expiry-e-g-valid-for-5-minutes-from-generation-in-component-state-in-loginsignup-tsx-do-not-persist-otps-in-the-backend-the-otp-validation-logic-must-be-entirely-client-side-for-this-simulated-flow",
+      "title": "Store the generated OTP and its expiry (e.g., valid for 5 minutes from generation) in component state in LoginSignup.tsx. Do not persist OTPs in the backend. The OTP validation logic must be entirely client-side for this simulated flow.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Header: Gold & Dark Blue theme, round avatar, VIP level, blinking wallet balance (₹50), blinking ADD CASH button",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Dynamic scrolling banner with 3 slides: welcome bonus, deposit offer, withdraw info",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Game grid: Multiplayer (Dragon vs Tiger, 7 Up Down, Andar Bahar) and Skill (Ludo, Mines, Crash) with game images",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Profit/loss system inside all games",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Bottom navigation bar: Home, Activity (daily check-in), Refer & Earn, Support/Mail, Account",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Payment page: amount selection ₹100/₹500/₹1000, QR code for UPI 7073791055, 12-digit UTR input, submit to admin",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Mobile number-based Signup/Login screen shown first",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-15",
+      "summary": "Implement backend data models and storage for: users (mobile, name, balance, VIP level, referral code), deposit requests (user ID, amount, UTR number, status), game round history (user ID, game name, bet amount, outcome, profit/loss), daily check-in records, and referral relationships.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-17",
+      "summary": "Audit the backend registerUser function in backend/main.mo to ensure it correctly handles new user creation: accepts mobile number, name, and optional referral code; initialises balance to 50; assigns a unique referral code; and returns a success variant. Fix any traps, missing cases, or logic errors that would cause the call to fail silently or with an error.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-18",
+      "summary": "Add OTP verification system on signup: after user enters mobile number, send/simulate OTP and verify it before account creation",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-19",
+      "summary": "In LoginSignup.tsx, implement a simulated OTP verification step in the signup and login flow. After the user enters their mobile number and taps Continue, generate a random 6-digit OTP in component state, display it visibly on screen in a styled gold info box (e.g., 'Your OTP is: XXXXXX — for demo purposes'), and render a numeric input field for the user to enter the OTP. Store the OTP and its expiry timestamp (5 minutes from generation) in React component state only — do not persist to the backend. Only advance to account creation (new user) or home screen (returning user) after the entered OTP exactly matches the generated one. If the OTP does not match, show a clear inline error message. After 3 failed attempts, invalidate the OTP and require the user to restart. On successful match, invalidate the OTP immediately.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "2d",
+  "projectName": "Gaming Wallet App",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}
