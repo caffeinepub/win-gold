@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yonodan.icp0.io/sitemap.xml

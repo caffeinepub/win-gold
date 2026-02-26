@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MessageCircle, Send, Loader2, CheckCircle, Phone, Clock } from 'lucide-react';
+import { MessageCircle, Send, Loader2, CheckCircle, Clock } from 'lucide-react';
 import { toast } from 'sonner';
 
 export default function Support() {
@@ -39,21 +39,12 @@ export default function Support() {
       </div>
 
       <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
-        {/* Contact info */}
-        <div className="grid grid-cols-2 gap-3">
-          <div className="bg-navy-700 border border-gold-500/20 rounded-xl p-3 flex items-center gap-3">
-            <Phone className="w-5 h-5 text-gold-400 flex-shrink-0" />
-            <div>
-              <p className="text-xs text-muted-foreground">UPI Support</p>
-              <p className="text-sm font-bold text-foreground">7073791055</p>
-            </div>
-          </div>
-          <div className="bg-navy-700 border border-gold-500/20 rounded-xl p-3 flex items-center gap-3">
-            <Clock className="w-5 h-5 text-gold-400 flex-shrink-0" />
-            <div>
-              <p className="text-xs text-muted-foreground">Response Time</p>
-              <p className="text-sm font-bold text-foreground">~30 mins</p>
-            </div>
+        {/* Response time info */}
+        <div className="bg-navy-700 border border-gold-500/20 rounded-xl p-3 flex items-center gap-3">
+          <Clock className="w-5 h-5 text-gold-400 flex-shrink-0" />
+          <div>
+            <p className="text-xs text-muted-foreground">Response Time</p>
+            <p className="text-sm font-bold text-foreground">~30 mins</p>
           </div>
         </div>
 
@@ -134,7 +125,7 @@ export default function Support() {
             <MessageCircle className="w-4 h-4 text-gold-400" /> Common Questions
           </p>
           {[
-            { q: 'How long does deposit take?', a: 'Deposits are credited within 30 minutes after UTR verification.' },
+            { q: 'How long does deposit take?', a: 'Balance is credited instantly after UTR submission.' },
             { q: 'How to withdraw?', a: 'Go to Account → Withdrawal. Minimum withdrawal is ₹100.' },
             { q: 'Referral bonus not received?', a: 'Referral bonus is credited after your friend makes their first deposit.' },
           ].map(({ q, a }) => (

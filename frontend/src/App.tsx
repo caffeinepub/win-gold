@@ -10,9 +10,10 @@ import ReferEarn from './pages/ReferEarn';
 import Support from './pages/Support';
 import Account from './pages/Account';
 import GamePlay from './pages/GamePlay';
+import Withdrawal from './pages/Withdrawal';
 import { Toaster } from '@/components/ui/sonner';
 
-export type Page = 'home' | 'payment' | 'activity' | 'refer' | 'support' | 'account' | 'game';
+export type Page = 'home' | 'payment' | 'activity' | 'refer' | 'support' | 'account' | 'game' | 'withdrawal';
 
 export interface AppUser {
   mobile: string;
@@ -173,9 +174,11 @@ export default function App() {
       case 'support':
         return <Support />;
       case 'account':
-        return <Account user={appUser} onLogout={handleLogout} />;
+        return <Account user={appUser} onLogout={handleLogout} navigateTo={navigateTo} />;
       case 'game':
         return <GamePlay gameName={currentGame} user={appUser} onBack={() => navigateTo('home')} onBalanceUpdate={refreshUser} />;
+      case 'withdrawal':
+        return <Withdrawal user={appUser} onBack={() => navigateTo('account')} />;
       default:
         return <Home user={appUser} navigateTo={navigateTo} />;
     }

@@ -1,40 +1,43 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Set app title to YONO DAN",
+  "title": "Add Withdrawal Amount Selection UI (Step 1)",
   "requirements": [
     {
       "id": "REQ-1",
-      "summary": "Set the app title to 'YONO DAN' in the HTML entry point",
+      "summary": "Create Withdrawal page with amount selection buttons (₹100, ₹200, ₹500, ₹1000) using dark navy/gold theme with visual selection state",
       "acceptanceCriteria": [
-        "Browser tab shows 'YONO DAN' when the app is open",
-        "The <title> tag in frontend/index.html reads 'YONO DAN'"
+        "A Withdrawal page exists at frontend/src/pages/Withdrawal.tsx",
+        "Four amount buttons are displayed: ₹100, ₹200, ₹500, ₹1000",
+        "Tapping a button highlights it as selected",
+        "Only one amount can be selected at a time",
+        "Page uses the existing dark navy/gold color scheme"
       ],
       "file_operations": [
         {
-          "path": "frontend/index.html",
-          "operation": "modify",
-          "description": "Update the <title> tag in the <head> section from the current title to 'YONO DAN' so the browser tab displays the new app name."
+          "path": "frontend/src/pages/Withdrawal.tsx",
+          "operation": "create",
+          "description": "Create a new Withdrawal page component that displays four withdrawal amount buttons (₹100, ₹200, ₹500, ₹1000). Implement React state to track the selected amount, ensuring only one button can be selected at a time. Apply the existing dark navy/gold theme using Tailwind classes consistent with the project's design system (navy-900 background, gold-500 accents). Add visual highlighting for the selected button using gold border and background effects. Include a page header matching the style of other pages in the app."
         }
       ]
     },
     {
       "id": "REQ-2",
-      "summary": "Update the app name/branding displayed in the app header and login screens to 'YONO DAN'",
+      "summary": "Add navigation to Withdrawal page from Account page and register the route in App.tsx",
       "acceptanceCriteria": [
-        "App header or logo area shows 'YONO DAN' as the app name",
-        "Login/signup screen reflects the 'YONO DAN' branding"
+        "User can navigate to the Withdrawal page from within the app",
+        "The route for the Withdrawal page is registered in App.tsx"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/Header.tsx",
+          "path": "frontend/src/App.tsx",
           "operation": "modify",
-          "description": "Update any app name or branding text in the Header component to display 'YONO DAN' as the app title or logo text."
+          "description": "Import the Withdrawal component and register a new route '/withdrawal' in the routing configuration. Add the route alongside existing routes like '/payment', '/game', etc. Ensure the route is protected behind authentication similar to other user-specific pages."
         },
         {
-          "path": "frontend/src/components/LoginSignup.tsx",
+          "path": "frontend/src/pages/Account.tsx",
           "operation": "modify",
-          "description": "Update the app name or branding text in the LoginSignup component to show 'YONO DAN', ensuring the login and signup screens reflect the new app branding."
+          "description": "Add a 'Withdraw' button in the Account page UI that navigates to the '/withdrawal' route. Position it near the wallet balance display or alongside the existing account action buttons. Style it consistently with the existing button design using the gold/navy theme. Use React Router's useNavigate hook to handle navigation."
         }
       ]
     }

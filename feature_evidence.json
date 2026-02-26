@@ -2,10 +2,10 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-set-the-app-title-to-yono-dan-in-the-html-entry-point-frontend-index-html-title-tag-so-it-appears-in-browser-tabs-and-when-shared",
-      "featureTitle": "Set the app title to 'YONO DAN' in the HTML entry point (frontend/index.html <title> tag) so it appears in browser tabs and when shared.",
+      "featureId": "feature-create-a-new-withdrawal-page-frontend-src-pages-withdrawal-tsx-that-displays-four-withdrawal-amount-buttons-100-200-500-and-1000-the-user-should-be-able-to-tap-a-button-to-select-that-amount-with-the-selected-amount-visually-highlighted-style-it-consistently-with-the-existing-dark-navy-gold-theme",
+      "featureTitle": "Create a new Withdrawal page (frontend/src/pages/Withdrawal.tsx) that displays four withdrawal amount buttons: ₹100, ₹200, ₹500, and ₹1000. The user should be able to tap a button to select that amount, with the selected amount visually highlighted. Style it consistently with the existing dark navy/gold theme.",
       "files": [
-        "frontend/index.html"
+        "frontend/src/pages/Withdrawal.tsx"
       ],
       "components": [
         "authorization@4.0.0",
@@ -23,10 +23,11 @@
       "confidence": "high"
     },
     {
-      "featureId": "feature-update-the-app-name-branding-displayed-in-the-app-header-and-any-splash-login-screens-from-the-current-title-to-yono-dan",
-      "featureTitle": "Update the app name/branding displayed in the app header and any splash/login screens from the current title to 'YONO DAN'.",
+      "featureId": "feature-add-a-withdraw-navigation-entry-to-the-bottom-navigation-bar-bottomnav-tsx-or-make-the-withdrawal-page-accessible-from-the-account-page-via-a-withdraw-button-so-users-can-navigate-to-the-new-withdrawal-page",
+      "featureTitle": "Add a 'Withdraw' navigation entry to the bottom navigation bar (BottomNav.tsx) or make the Withdrawal page accessible from the Account page via a 'Withdraw' button, so users can navigate to the new Withdrawal page.",
       "files": [
-        "frontend/src/components/LoginSignup.tsx"
+        "frontend/src/App.tsx",
+        "frontend/src/pages/Account.tsx"
       ],
       "components": [
         "authorization@4.0.0",

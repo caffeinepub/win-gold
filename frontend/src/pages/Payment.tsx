@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useActor } from '../hooks/useActor';
 import { AppUser } from '../App';
-import { ArrowLeft, Loader2, CheckCircle, Copy } from 'lucide-react';
+import { ArrowLeft, Loader2, CheckCircle, Copy, Gift } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface Props {
@@ -34,8 +34,9 @@ export default function Payment({ user, onBack, onSuccess }: Props) {
         utrNumber: utr,
       });
       setSubmitted(true);
+      // Refresh user balance in header immediately
       onSuccess();
-      toast.success('Deposit request submitted! Admin will verify shortly.');
+      toast.success(`₹${selectedAmount} + ₹50 Bonus credited to your wallet!`);
     } catch (err: any) {
       toast.error(err?.message || 'Failed to submit. Please try again.');
     } finally {
@@ -56,9 +57,30 @@ export default function Payment({ user, onBack, onSuccess }: Props) {
           <div className="w-20 h-20 rounded-full bg-green-500/20 border-2 border-green-500 flex items-center justify-center">
             <CheckCircle className="w-10 h-10 text-green-400" />
           </div>
-          <h2 className="text-2xl font-bold text-foreground">Request Submitted!</h2>
-          <p className="text-muted-foreground">Your deposit of <span className="text-gold-400 font-bold">₹{selectedAmount}</span> has been submitted.</p>
-          <p className="text-muted-foreground text-sm">Admin will verify your UTR and credit your wallet within 30 minutes.</p>
+          <h2 className="text-2xl font-bold text-foreground">Credited Successfully!</h2>
+
+          {/* Bonus breakdown */}
+          <div className="bg-navy-700 border border-gold-500/30 rounded-xl p-4 w-full space-y-2">
+            <div className="flex justify-between items-center">
+              <span className="text-muted-foreground text-sm">Deposit Amount</span>
+              <span className="text-foreground font-bold">₹{selectedAmount}</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-gold-400 text-sm flex items-center gap-1">
+                <Gift className="w-4 h-4" /> Instant Bonus
+              </span>
+              <span className="text-gold-400 font-bold">+ ₹50</span>
+            </div>
+            <div className="border-t border-gold-500/20 pt-2 flex justify-between items-center">
+              <span className="text-foreground font-bold">Total Credited</span>
+              <span className="text-green-400 font-bold text-lg">₹{selectedAmount + 50}</span>
+            </div>
+          </div>
+
+          <p className="text-green-400 font-bold text-sm">
+            🎉 ₹{selectedAmount} + ₹50 Bonus credited to your wallet!
+          </p>
+
           <div className="bg-navy-700 border border-gold-500/20 rounded-xl p-4 w-full text-left">
             <p className="text-xs text-muted-foreground">UTR Number</p>
             <p className="font-bold text-foreground font-game tracking-widest">{utr}</p>
@@ -109,11 +131,12 @@ export default function Payment({ user, onBack, onSuccess }: Props) {
               </button>
             ))}
           </div>
-          {selectedAmount === 100 && (
-            <div className="mt-3 bg-gold-500/10 border border-gold-500/30 rounded-lg px-3 py-2">
-              <p className="text-xs text-gold-400 font-bold">🎁 OFFER: Add ₹100 → Get ₹50 EXTRA = ₹150 Total!</p>
-            </div>
-          )}
+          {/* Bonus offer banner — always visible */}
+          <div className="mt-3 bg-gold-500/10 border border-gold-500/30 rounded-lg px-3 py-2">
+            <p className="text-xs text-gold-400 font-bold">
+              🎁 OFFER: Add ₹{selectedAmount} → Get ₹50 EXTRA = ₹{selectedAmount + 50} Total!
+            </p>
+          </div>
         </div>
 
         {/* Step 2: QR Code */}
@@ -123,7 +146,6 @@ export default function Payment({ user, onBack, onSuccess }: Props) {
             <p className="font-bold text-foreground">Pay via PhonePe</p>
           </div>
           <div className="bg-white rounded-xl p-4 flex flex-col items-center gap-3">
-            {/* The user's uploaded QR code */}
             <img
               src="/assets/Screenshot_20260225-124254.jpg"
               alt="PhonePe QR Code"
@@ -131,20 +153,11 @@ export default function Payment({ user, onBack, onSuccess }: Props) {
             />
             <div className="text-center">
               <p className="text-navy-800 font-bold text-sm">Pay to Merchant</p>
-              <div className="flex items-center gap-2 mt-1">
-                <p className="text-navy-900 font-game font-black text-lg tracking-widest">7073791055</p>
-                <button
-                  onClick={() => { navigator.clipboard.writeText('7073791055'); toast.success('Number copied!'); }}
-                  className="p-1 rounded bg-navy-100"
-                >
-                  <Copy className="w-3 h-3 text-navy-600" />
-                </button>
-              </div>
               <p className="text-navy-600 text-xs mt-1">Amount: <span className="font-bold text-navy-800">₹{selectedAmount}</span></p>
             </div>
           </div>
           <p className="text-xs text-muted-foreground text-center mt-2">
-            Scan QR or pay to UPI: <span className="text-gold-400">7073791055@phonepe</span>
+            Scan QR code to pay via PhonePe
           </p>
         </div>
 
@@ -175,7 +188,12 @@ export default function Payment({ user, onBack, onSuccess }: Props) {
         <div className="bg-navy-700 border border-gold-500/20 rounded-xl p-4">
           <div className="flex items-center gap-2 mb-3">
             <span className="w-6 h-6 rounded-full gold-gradient text-navy-800 text-xs font-bold flex items-center justify-center">4</span>
-            <p className="font-bold text-foreground">Submit Request</p>
+            <p className="font-bold text-foreground">Submit & Get Instant Bonus</p>
+          </div>
+          <div className="bg-green-500/10 border border-green-500/30 rounded-lg px-3 py-2 mb-3">
+            <p className="text-xs text-green-400 font-bold text-center">
+              ✅ Submit UTR → Instant ₹{selectedAmount} + ₹50 Bonus credited!
+            </p>
           </div>
           <button
             onClick={handleSubmit}
@@ -185,14 +203,14 @@ export default function Payment({ user, onBack, onSuccess }: Props) {
             {isSubmitting ? (
               <><Loader2 className="w-5 h-5 animate-spin" /> Submitting...</>
             ) : (
-              <>✅ SUBMIT DEPOSIT REQUEST</>
+              <>✅ SUBMIT & GET ₹{selectedAmount + 50}</>
             )}
           </button>
         </div>
 
         <div className="text-center pb-4">
           <p className="text-xs text-muted-foreground">
-            Deposits are verified within 30 minutes. For help, contact Support.
+            Balance is credited instantly after UTR submission. For help, contact Support.
           </p>
         </div>
       </div>

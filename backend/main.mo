@@ -105,36 +105,27 @@ actor {
     userProfiles.add(caller, profile);
   };
 
-  // Registration is open to all callers including guests (anonymous principals).
-  // No authorization check needed here — this is the entry point for new users.
-  // NOTE: We do NOT call AccessControl.assignRole here because that function
-  // has an admin-only guard and would trap for non-admin callers.
-  // The #user role is granted via the MixinAuthorization initialize flow
-  // or by an admin separately. The app uses principalToMobile mapping to
-  // identify registered users for ownership checks.
   public shared ({ caller }) func registerUser(mobile : Text, name : Text, referredBy : Text) : async RegisterResult {
     if (mobile.size() != 10) {
       return #invalidMobileFormat;
     };
-    // Validate that mobile contains only digits
+
     for (c in mobile.chars()) {
       if (c < '0' or c > '9') {
         return #invalidMobileFormat;
       };
     };
-    // Check if this principal is already registered
+
     switch (state.principalToMobile.get(caller)) {
       case (?_existingMobile) {
-        // Principal already registered; treat as duplicate
         return #mobileAlreadyExists;
       };
       case (null) {};
     };
-    // Check if mobile number is already taken
+
     switch (state.users.get(mobile)) {
       case (?_) { return #mobileAlreadyExists };
       case (null) {
-        // Validate referral code if provided
         if (referredBy != "") {
           var referralValid = false;
           for ((_, u) in state.users.entries()) {
@@ -146,6 +137,7 @@ actor {
             return #invalidReferralCode;
           };
         };
+
         let referralCode = "REF".concat(mobile);
         let welcomeBonus : Nat = 50;
         let newUser : User = {
@@ -158,6 +150,7 @@ actor {
         };
         state.users.add(mobile, newUser);
         state.principalToMobile.add(caller, mobile);
+
         let profile : UserProfile = {
           name;
           mobile;
@@ -170,10 +163,6 @@ actor {
     };
   };
 
-  // Login is open to all callers including guests.
-  // No authorization check needed — this is the entry point for existing users.
-  // NOTE: We do NOT call AccessControl.assignRole here because that function
-  // has an admin-only guard and would trap for non-admin callers.
   public shared ({ caller }) func loginUser(mobile : Text) : async User {
     switch (state.users.get(mobile)) {
       case (null) { Runtime.trap("User not found") };
@@ -207,8 +196,9 @@ actor {
     };
   };
 
-  // createDepositRequest: requires registered user (ownership check via principalToMobile)
-  public shared ({ caller }) func createDepositRequest({ userId; amount; utrNumber } : DepositRequestInput) : async Nat {
+  public shared ({ caller }) func createDepositRequest(
+    { userId; amount; utrNumber } : DepositRequestInput
+  ) : async Nat {
     let callerMobile = state.principalToMobile.get(caller);
     let isOwner = switch (callerMobile) {
       case (?m) { m == userId };
@@ -217,20 +207,30 @@ actor {
     if (not isOwner and not AccessControl.isAdmin(accessControlState, caller)) {
       Runtime.trap("Unauthorized: Can only create deposit requests for your own account");
     };
-    let deposit : DepositRequest = {
-      userId;
-      amount;
-      utrNumber;
-      status = "pending";
-      timestamp = Time.now();
+
+    if (utrNumber.size() != 12) {
+      Runtime.trap("Invalid UTR: Must be 12 digits");
     };
-    let depositId = state.nextDepositId;
-    state.deposits.add(depositId, deposit);
-    state.nextDepositId += 1;
-    depositId;
+
+    for (c in utrNumber.chars()) {
+      if (c < '0' or c > '9') {
+        Runtime.trap("Invalid UTR: Must contain only digits");
+      };
+    };
+
+    switch (state.users.get(userId)) {
+      case (null) { Runtime.trap("User not found") };
+      case (?user) {
+        let totalAmount = amount + 50;
+        let updatedUser = {
+          user with balance = user.balance + totalAmount;
+        };
+        state.users.add(userId, updatedUser);
+        return 0;
+      };
+    };
   };
 
-  // getPendingDeposits: admin only
   public query ({ caller }) func getPendingDeposits() : async [(Nat, DepositRequest)] {
     if (not (AccessControl.hasPermission(accessControlState, caller, #admin))) {
       Runtime.trap("Unauthorized: Only admins can view deposit requests");
@@ -240,7 +240,6 @@ actor {
     });
   };
 
-  // approveDeposit: admin only
   public shared ({ caller }) func approveDeposit(depositId : Nat) : async () {
     if (not (AccessControl.hasPermission(accessControlState, caller, #admin))) {
       Runtime.trap("Unauthorized: Only admins can approve deposits");
@@ -265,7 +264,6 @@ actor {
     };
   };
 
-  // getDepositStatus: ownership or admin check
   public query ({ caller }) func getDepositStatus(depositId : Nat) : async Text {
     switch (state.deposits.get(depositId)) {
       case (null) { Runtime.trap("Deposit not found") };
@@ -283,7 +281,6 @@ actor {
     };
   };
 
-  // resolveDepositRequest: admin only
   public shared ({ caller }) func resolveDepositRequest(depositId : Nat) : async () {
     if (not (AccessControl.hasPermission(accessControlState, caller, #admin))) {
       Runtime.trap("Unauthorized: Only admins can resolve deposit requests");
@@ -308,7 +305,6 @@ actor {
     };
   };
 
-  // setPaymentQR: admin only
   public shared ({ caller }) func setPaymentQR(qr : Storage.ExternalBlob) : async () {
     if (not (AccessControl.hasPermission(accessControlState, caller, #admin))) {
       Runtime.trap("Unauthorized: Only admins can set the QR code");
@@ -316,12 +312,10 @@ actor {
     state.paymentQR := ?qr;
   };
 
-  // getPaymentQR: public, no auth needed
   public query func getPaymentQR() : async ?Storage.ExternalBlob {
     state.paymentQR;
   };
 
-  // recordGameRound: requires registered user (ownership via principalToMobile)
   public shared ({ caller }) func recordGameRound(
     gameName : Text,
     betAmount : Nat,

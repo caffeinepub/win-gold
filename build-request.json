@@ -1,51 +1,59 @@
 {
   "kind": "build_request",
-  "title": "Set app title to YONO DAN",
+  "title": "Add Withdrawal Amount Selection UI (Step 1)",
   "projectName": "YONO DAN",
   "priority": "normal",
   "requirements": [
     {
       "id": "REQ-1",
-      "text": "Set the app title to 'YONO DAN' in the HTML entry point (frontend/index.html <title> tag) so it appears in browser tabs and when shared.",
+      "text": "Create a new Withdrawal page (frontend/src/pages/Withdrawal.tsx) that displays four withdrawal amount buttons: ₹100, ₹200, ₹500, and ₹1000. The user should be able to tap a button to select that amount, with the selected amount visually highlighted. Style it consistently with the existing dark navy/gold theme.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-latest"
+          "msg-7",
+          "msg-10"
         ],
         "quotes": [
-          "YONO DAN"
+          "Withdrawal ( 100 , 200 , 500 , 1000 )",
+          "Ha chote step me hi kar do"
         ]
       },
       "acceptanceCriteria": [
-        "Browser tab shows 'YONO DAN' when the app is open",
-        "The <title> tag in frontend/index.html reads 'YONO DAN'"
+        "A Withdrawal page exists at frontend/src/pages/Withdrawal.tsx",
+        "Four amount buttons are displayed: ₹100, ₹200, ₹500, ₹1000",
+        "Tapping a button highlights it as selected",
+        "Only one amount can be selected at a time",
+        "Page uses the existing dark navy/gold color scheme"
       ]
     },
     {
       "id": "REQ-2",
-      "text": "Update the app name/branding displayed in the app header and any splash/login screens from the current title to 'YONO DAN'.",
+      "text": "Add a 'Withdraw' navigation entry to the bottom navigation bar (BottomNav.tsx) or make the Withdrawal page accessible from the Account page via a 'Withdraw' button, so users can navigate to the new Withdrawal page.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-latest"
+          "msg-7",
+          "msg-10"
         ],
         "quotes": [
-          "YONO DAN"
+          "Withdrawal ( 100 , 200 , 500 , 1000 )"
         ]
       },
       "acceptanceCriteria": [
-        "App header or logo area shows 'YONO DAN' as the app name",
-        "Login/signup screen reflects the 'YONO DAN' branding"
+        "User can navigate to the Withdrawal page from within the app",
+        "The route for the Withdrawal page is registered in App.tsx"
       ]
     }
   ],
   "constraints": [
-    "Do not change any game logic, backend data, or user account functionality"
+    "Do not add UPI ID input or backend submission in this step — only amount selection UI",
+    "Do not modify any files under frontend/src/hooks/ or frontend/src/components/ui",
+    "Keep changes minimal to avoid build failures"
   ],
   "nonGoals": [
-    "Changing the app's color theme or layout",
-    "Adding new features or pages",
-    "Modifying backend actor code"
+    "UPI ID input field (to be added in a later step)",
+    "Backend withdrawal request submission (to be added in a later step)",
+    "Withdrawal history or status tracking"
   ],
   "imageRequirements": {
     "required": [],

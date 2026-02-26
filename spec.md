@@ -1,10 +1,12 @@
 # Specification
 
 ## Summary
-**Goal:** Rebrand the app title and displayed name to "YONO DAN" throughout the frontend.
+**Goal:** Add a Withdrawal page with amount selection UI (Step 1), accessible from within the app, using the existing dark navy/gold theme.
 
 **Planned changes:**
-- Update the `<title>` tag in `frontend/index.html` to "YONO DAN"
-- Update the app name/branding in the header and login/signup screen to display "YONO DAN"
+- Create `frontend/src/pages/Withdrawal.tsx` with four amount buttons: ₹100, ₹200, ₹500, and ₹1000
+- Selected amount button is visually highlighted; only one can be selected at a time
+- Register the Withdrawal page route in `App.tsx`
+- Add a "Withdraw" navigation entry or button (via BottomNav or Account page) to navigate to the Withdrawal page
 
-**User-visible outcome:** The browser tab and all branding areas in the app (header, login screen) now show "YONO DAN" as the app name.
+**User-visible outcome:** Users can open the Withdrawal page and tap one of four preset amounts (₹100, ₹200, ₹500, ₹1000) to select it, with the selection visually indicated. No form submission or UPI input is included in this step.

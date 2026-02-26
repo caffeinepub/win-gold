@@ -1,29 +1,42 @@
 {
   "schemaVersion": "1.0.0",
   "projectStateVersion": 3,
-  "summary": "A game app project being built and deployed. User wants the app title set to 'YONO DAN'.",
-  "architectural_notes": [],
-  "known_issues": [],
+  "summary": "App with UTR-based reward system (100 + 50 bonus) and withdrawal feature being built. Withdrawal feature (amounts: 100, 200, 500, 1000 with UPI ID) is being added in small steps due to repeated build failures.",
+  "architectural_notes": [
+    "Build failures occur when requests are too complex; implement features in small incremental steps",
+    "UTR entry gives users 100 + 50 bonus automatically"
+  ],
+  "known_issues": [
+    "Withdrawal feature build has failed multiple times; must be added in small steps (amount selection first, then UPI input)"
+  ],
   "isFixRequest": false,
   "existing_features": [
     {
-      "id": "feature-set-the-app-title-to-yono-dan-in-the-html-entry-point-frontend-index-html-title-tag-so-it-appears-in-browser-tabs-and-when-shared",
-      "title": "Set the app title to 'YONO DAN' in the HTML entry point (frontend/index.html <title> tag) so it appears in browser tabs and when shared.",
+      "id": "feature-create-a-new-withdrawal-page-frontend-src-pages-withdrawal-tsx-that-displays-four-withdrawal-amount-buttons-100-200-500-and-1000-the-user-should-be-able-to-tap-a-button-to-select-that-amount-with-the-selected-amount-visually-highlighted-style-it-consistently-with-the-existing-dark-navy-gold-theme",
+      "title": "Create a new Withdrawal page (frontend/src/pages/Withdrawal.tsx) that displays four withdrawal amount buttons: ₹100, ₹200, ₹500, and ₹1000. The user should be able to tap a button to select that amount, with the selected amount visually highlighted. Style it consistently with the existing dark navy/gold theme.",
       "reqIds": [
         "REQ-1"
       ],
       "version": 1
     },
     {
-      "id": "feature-update-the-app-name-branding-displayed-in-the-app-header-and-any-splash-login-screens-from-the-current-title-to-yono-dan",
-      "title": "Update the app name/branding displayed in the app header and any splash/login screens from the current title to 'YONO DAN'.",
+      "id": "feature-add-a-withdraw-navigation-entry-to-the-bottom-navigation-bar-bottomnav-tsx-or-make-the-withdrawal-page-accessible-from-the-account-page-via-a-withdraw-button-so-users-can-navigate-to-the-new-withdrawal-page",
+      "title": "Add a 'Withdraw' navigation entry to the bottom navigation bar (BottomNav.tsx) or make the Withdrawal page accessible from the Account page via a 'Withdraw' button, so users can navigate to the new Withdrawal page.",
       "reqIds": [
         "REQ-2"
       ],
       "version": 1
     }
   ],
-  "new_feature_requests": [],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Add withdrawal section where user can select amount (100, 200, 500, 1000 rupees) and enter UPI ID to request withdrawal",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
   "projectName": "YONO DAN",
   "clarification_mode": "instant",
   "clarification_rounds": 0

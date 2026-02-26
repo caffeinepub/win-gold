@@ -2,17 +2,18 @@ import { useState, useEffect } from 'react';
 import { useActor } from '../hooks/useActor';
 import { useInternetIdentity } from '../hooks/useInternetIdentity';
 import { useQueryClient } from '@tanstack/react-query';
-import { AppUser } from '../App';
-import { LogOut, Trophy, TrendingUp, TrendingDown, Clock, User, Phone, Star } from 'lucide-react';
+import { AppUser, Page } from '../App';
+import { LogOut, Trophy, TrendingUp, TrendingDown, Clock, Phone, Star, ArrowDownToLine } from 'lucide-react';
 import { toast } from 'sonner';
 import type { Game } from '../backend';
 
 interface Props {
   user: AppUser;
   onLogout: () => void;
+  navigateTo: (page: Page) => void;
 }
 
-export default function Account({ user, onLogout }: Props) {
+export default function Account({ user, onLogout, navigateTo }: Props) {
   const { actor } = useActor();
   const { clear } = useInternetIdentity();
   const queryClient = useQueryClient();
@@ -76,10 +77,19 @@ export default function Account({ user, onLogout }: Props) {
           </div>
         </div>
 
-        {/* Balance */}
+        {/* Balance + Withdraw button */}
         <div className="bg-navy-700 border border-gold-500/30 rounded-xl p-4">
           <p className="text-sm text-muted-foreground mb-1">Wallet Balance</p>
-          <p className="text-3xl font-black font-game gold-text">₹{Number(user.balance).toLocaleString('en-IN')}</p>
+          <p className="text-3xl font-black font-game gold-text mb-3">
+            ₹{Number(user.balance).toLocaleString('en-IN')}
+          </p>
+          <button
+            onClick={() => navigateTo('withdrawal')}
+            className="w-full py-3 rounded-xl bg-gold-500/10 border border-gold-500/40 text-gold-400 font-bold flex items-center justify-center gap-2 hover:bg-gold-500/20 transition-colors"
+          >
+            <ArrowDownToLine className="w-5 h-5" />
+            Withdraw
+          </button>
         </div>
 
         {/* Stats */}
