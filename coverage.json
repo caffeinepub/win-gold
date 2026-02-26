@@ -1,32 +1,49 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-25T14:08:05.190Z",
+  "generatedAt": "2026-02-26T02:05:31.271Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 1,
-    "implemented": 0,
+    "total": 2,
+    "implemented": 2,
     "items": [
       {
-        "id": "REQ-16",
-        "summary": "Fix the game loading issue in GamePlay.tsx where game screens get stuck on a loading/spinner state and never render the actual game UI. Remove or resolve any blocking async calls, actor initialization guards, or conditional rendering logic that prevents the game view from appearing. Ensure that tapping any game card from GameGrid correctly navigates to and fully renders the corresponding game play screen (Dragon vs Tiger, 7 Up Down, Andar Bahar, Ludo, Mines, Crash) without hanging. The game UI must render immediately (or within a short deterministic timeout) regardless of actor/backend availability — fall back to local game logic if the actor is not yet initialized rather than staying on a spinner indefinitely.",
-        "status": "missing",
+        "id": "REQ-1",
+        "summary": "Set the app title to 'YONO DAN' in the HTML entry point (frontend/index.html <title> tag) so it appears in browser tabs and when shared.",
+        "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/GamePlay.tsx"
+          "frontend/index.html"
         ],
-        "matchedFiles": []
+        "matchedFiles": [
+          "frontend/index.html"
+        ]
+      },
+      {
+        "id": "REQ-2",
+        "summary": "Update the app name/branding displayed in the app header and any splash/login screens from the current title to 'YONO DAN'.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/Header.tsx",
+          "frontend/src/components/LoginSignup.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/LoginSignup.tsx"
+        ]
       }
     ]
   },
   "changedFiles": [
     "build-request.json",
+    "build-template/README.md",
+    "caffeine.lock.json",
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/App.tsx",
+    "frontend/index.html",
+    "frontend/src/components/LoginSignup.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

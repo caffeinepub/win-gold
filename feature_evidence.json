@@ -1,4 +1,47 @@
 {
   "kind": "feature_evidence_report",
-  "features": []
+  "features": [
+    {
+      "featureId": "feature-set-the-app-title-to-yono-dan-in-the-html-entry-point-frontend-index-html-title-tag-so-it-appears-in-browser-tabs-and-when-shared",
+      "featureTitle": "Set the app title to 'YONO DAN' in the HTML entry point (frontend/index.html <title> tag) so it appears in browser tabs and when shared.",
+      "files": [
+        "frontend/index.html"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "invite-links@3.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-update-the-app-name-branding-displayed-in-the-app-header-and-any-splash-login-screens-from-the-current-title-to-yono-dan",
+      "featureTitle": "Update the app name/branding displayed in the app header and any splash/login screens from the current title to 'YONO DAN'.",
+      "files": [
+        "frontend/src/components/LoginSignup.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "invite-links@3.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    }
+  ]
 }

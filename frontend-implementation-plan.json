@@ -1,24 +1,40 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Fix game loading screen — games stuck on loading spinner",
+  "title": "Set app title to YONO DAN",
   "requirements": [
     {
-      "id": "REQ-16",
-      "summary": "Fix the game loading issue in GamePlay.tsx where game screens get stuck on a loading/spinner state and never render the actual game UI. Remove or resolve any blocking async calls, actor initialization guards, or conditional rendering logic that prevents the game view from appearing.",
+      "id": "REQ-1",
+      "summary": "Set the app title to 'YONO DAN' in the HTML entry point",
       "acceptanceCriteria": [
-        "Tapping any of the 6 game cards on the Home screen navigates to that game's play screen without getting stuck on a loading spinner.",
-        "The game play UI (bet selection, game board/controls, Play button) is fully visible and interactive within 2 seconds of navigation.",
-        "If the backend actor is unavailable or slow to initialize, the game still renders using local/fallback logic — no indefinite loading state.",
-        "All 6 games (Dragon vs Tiger, 7 Up Down, Andar Bahar, Ludo, Mines, Crash) are individually tested and render correctly.",
-        "No unhandled promise rejections or console errors related to actor initialization block the game render.",
-        "The back/close button on the game screen correctly returns the user to the Home screen."
+        "Browser tab shows 'YONO DAN' when the app is open",
+        "The <title> tag in frontend/index.html reads 'YONO DAN'"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/pages/GamePlay.tsx",
+          "path": "frontend/index.html",
           "operation": "modify",
-          "description": "Remove or refactor any conditional rendering logic that blocks the game UI when the actor is loading or unavailable. Ensure the game UI (bet selection panel, game board, Play button) renders immediately regardless of actor state. If actor operations (balance fetch, game recording) fail or are pending, show the game UI anyway and handle errors gracefully with toast notifications or inline error messages. Eliminate any spinner/loading state that prevents the user from seeing the game interface. Verify that all six games (Dragon vs Tiger, 7 Up Down, Andar Bahar, Ludo, Mines, Crash) render their play screens correctly without hanging on a loading spinner."
+          "description": "Update the <title> tag in the <head> section from the current title to 'YONO DAN' so the browser tab displays the new app name."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Update the app name/branding displayed in the app header and login screens to 'YONO DAN'",
+      "acceptanceCriteria": [
+        "App header or logo area shows 'YONO DAN' as the app name",
+        "Login/signup screen reflects the 'YONO DAN' branding"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Header.tsx",
+          "operation": "modify",
+          "description": "Update any app name or branding text in the Header component to display 'YONO DAN' as the app title or logo text."
+        },
+        {
+          "path": "frontend/src/components/LoginSignup.tsx",
+          "operation": "modify",
+          "description": "Update the app name or branding text in the LoginSignup component to show 'YONO DAN', ensuring the login and signup screens reflect the new app branding."
         }
       ]
     }

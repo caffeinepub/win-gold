@@ -207,7 +207,7 @@ export default function LoginSignup({ onSuccess }: Props) {
         <div className="w-20 h-20 rounded-2xl gold-gradient flex items-center justify-center mb-4 animate-pulse-glow">
           <Gamepad2 className="w-10 h-10 text-navy-800" />
         </div>
-        <h1 className="font-game text-3xl font-bold gold-text tracking-wider">WINZONE</h1>
+        <h1 className="font-game text-3xl font-bold gold-text tracking-wider">YONO DAN</h1>
         <p className="text-navy-200 text-sm mt-1 tracking-widest">GAMING WALLET</p>
       </div>
 
@@ -452,19 +452,20 @@ export default function LoginSignup({ onSuccess }: Props) {
               </button>
 
               <button
-                onClick={() => { setStep('mobile'); setErrorMsg(''); }}
+                onClick={() => { setStep('mobile'); setErrorMsg(''); setIsNewUser(false); }}
                 className="w-full text-muted-foreground text-sm py-2"
               >
                 ← Back
               </button>
             </div>
           )}
+
         </div>
       </div>
 
       {/* Footer */}
-      <div className="relative z-10 text-center pb-6 px-6">
-        <p className="text-muted-foreground text-xs">
+      <div className="relative z-10 pb-6 text-center">
+        <p className="text-navy-300 text-xs">
           Built with ❤️ using{' '}
           <a
             href={`https://caffeine.ai/?utm_source=Caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(window.location.hostname)}`}

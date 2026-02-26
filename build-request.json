@@ -1,41 +1,51 @@
 {
   "kind": "build_request",
-  "title": "Fix game loading screen — games stuck on loading spinner",
-  "projectName": "Gaming Wallet App",
-  "priority": "high",
+  "title": "Set app title to YONO DAN",
+  "projectName": "YONO DAN",
+  "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-16",
-      "text": "Fix the game loading issue in GamePlay.tsx where game screens get stuck on a loading/spinner state and never render the actual game UI. Remove or resolve any blocking async calls, actor initialization guards, or conditional rendering logic that prevents the game view from appearing. Ensure that tapping any game card from GameGrid correctly navigates to and fully renders the corresponding game play screen (Dragon vs Tiger, 7 Up Down, Andar Bahar, Ludo, Mines, Crash) without hanging. The game UI must render immediately (or within a short deterministic timeout) regardless of actor/backend availability — fall back to local game logic if the actor is not yet initialized rather than staying on a spinner indefinitely.",
+      "id": "REQ-1",
+      "text": "Set the app title to 'YONO DAN' in the HTML entry point (frontend/index.html <title> tag) so it appears in browser tabs and when shared.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-latest"
         ],
         "quotes": [
-          "Draft me game loading par ataka huaa hai"
+          "YONO DAN"
         ]
       },
       "acceptanceCriteria": [
-        "Tapping any of the 6 game cards on the Home screen navigates to that game's play screen without getting stuck on a loading spinner.",
-        "The game play UI (bet selection, game board/controls, Play button) is fully visible and interactive within 2 seconds of navigation.",
-        "If the backend actor is unavailable or slow to initialize, the game still renders using local/fallback logic — no indefinite loading state.",
-        "All 6 games (Dragon vs Tiger, 7 Up Down, Andar Bahar, Ludo, Mines, Crash) are individually tested and render correctly.",
-        "No unhandled promise rejections or console errors related to actor initialization block the game render.",
-        "The back/close button on the game screen correctly returns the user to the Home screen."
+        "Browser tab shows 'YONO DAN' when the app is open",
+        "The <title> tag in frontend/index.html reads 'YONO DAN'"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Update the app name/branding displayed in the app header and any splash/login screens from the current title to 'YONO DAN'.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-latest"
+        ],
+        "quotes": [
+          "YONO DAN"
+        ]
+      },
+      "acceptanceCriteria": [
+        "App header or logo area shows 'YONO DAN' as the app name",
+        "Login/signup screen reflects the 'YONO DAN' branding"
       ]
     }
   ],
   "constraints": [
-    "Do not modify files under frontend/src/hooks/ (immutable paths).",
-    "Do not change the backend game logic or result calculation — only fix the frontend rendering/loading flow.",
-    "Do not reuse requirement IDs below REQ-16."
+    "Do not change any game logic, backend data, or user account functionality"
   ],
   "nonGoals": [
-    "Adding new games or changing existing game mechanics.",
-    "Changing the visual theme or game card designs.",
-    "Fixing unrelated backend issues such as deposit requests or user registration.",
-    "Real-time multiplayer or WebSocket features."
+    "Changing the app's color theme or layout",
+    "Adding new features or pages",
+    "Modifying backend actor code"
   ],
   "imageRequirements": {
     "required": [],
