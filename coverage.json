@@ -1,7 +1,7 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-25T13:50:00.142Z",
+  "generatedAt": "2026-02-25T14:08:05.190Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
@@ -11,11 +11,11 @@
     "implemented": 0,
     "items": [
       {
-        "id": "REQ-14",
-        "summary": "In LoginSignup.tsx, implement a simulated OTP verification step in the signup and login flow. After the user enters their mobile number and taps Continue, generate a random 6-digit OTP in component state, display it visibly on screen in a styled gold info box (e.g., 'Your OTP is: XXXXXX — for demo purposes'), and render a numeric input field for the user to enter the OTP. Store the OTP and its expiry timestamp (5 minutes from generation) in React component state only — do not persist to the backend. Only advance to account creation (new user) or home screen (returning user) after the entered OTP exactly matches the generated one. If the OTP does not match, show a clear inline error message. After 3 failed attempts, invalidate the OTP and require the user to restart. On successful match, invalidate the OTP immediately.",
+        "id": "REQ-16",
+        "summary": "Fix the game loading issue in GamePlay.tsx where game screens get stuck on a loading/spinner state and never render the actual game UI. Remove or resolve any blocking async calls, actor initialization guards, or conditional rendering logic that prevents the game view from appearing. Ensure that tapping any game card from GameGrid correctly navigates to and fully renders the corresponding game play screen (Dragon vs Tiger, 7 Up Down, Andar Bahar, Ludo, Mines, Crash) without hanging. The game UI must render immediately (or within a short deterministic timeout) regardless of actor/backend availability — fall back to local game logic if the actor is not yet initialized rather than staying on a spinner indefinitely.",
         "status": "missing",
         "plannedFiles": [
-          "frontend/src/components/LoginSignup.tsx"
+          "frontend/src/pages/GamePlay.tsx"
         ],
         "matchedFiles": []
       }
@@ -26,6 +26,7 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
+    "frontend/src/App.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

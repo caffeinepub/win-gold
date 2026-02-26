@@ -1,21 +1,32 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-25T13:50:00.139Z",
-  "summary": "The diff shows that LoginSignup.tsx was modified to implement a 4-step flow including an OTP step with a simulated 6-digit OTP displayed in a styled gold info box, a 3-attempt limit, 5-minute expiry, and a Resend OTP option. The file summary description aligns well with all REQ-14 acceptance criteria. However, since only a summary of the file is provided (not the actual code diff), some implementation details cannot be fully verified.",
-  "missing_requirements": [],
-  "hallucinated_features": [
+  "generatedAt": "2026-02-25T14:08:05.188Z",
+  "summary": "The diff addresses REQ-16 by modifying App.tsx to add a 5-second loading timeout guard that prevents indefinite spinner states, and by refactoring GamePlay.tsx to use prop-based navigation with local balance state and non-blocking backend recording. GameGrid.tsx is also updated to call navigateTo with the full game name. The core requirement of fixing the loading/spinner issue is addressed, with fallback logic and a deterministic timeout implemented.",
+  "missing_requirements": [
     {
-      "description": "Resend OTP option",
-      "reason": "The diff summary mentions a 'Resend OTP option' which was not requested in REQ-14. The requirement only specifies generating OTP on Continue, invalidating after 3 failed attempts, and requiring the user to restart — no resend functionality was requested.",
+      "id": "REQ-16",
+      "requirement": "All 6 games (Dragon vs Tiger, 7 Up Down, Andar Bahar, Ludo, Mines, Crash) are individually tested and render correctly.",
+      "reason": "The diff shows structural fixes to GamePlay.tsx and App.tsx but there is no evidence of test coverage or verification that all 6 individual game UIs render correctly. No test files are added or modified.",
       "evidence": [
+        "frontend/src/pages/GamePlay.tsx",
         "frontend-file-summaries.txt"
       ]
     }
   ],
-  "confidence": 0.7,
+  "hallucinated_features": [
+    {
+      "description": "5-second loading timeout guard added to App.tsx for overall actor initialization and profile checking",
+      "reason": "The build request specifies fixing the loading issue in GamePlay.tsx specifically. The timeout guard was added to App.tsx's overall loading state which is a broader scope than what was strictly requested, though it does support the requirement indirectly.",
+      "evidence": [
+        "frontend/src/App.tsx"
+      ]
+    }
+  ],
+  "confidence": 0.72,
   "changed_files": [
     "frontend-file-summaries.txt",
+    "frontend/src/App.tsx",
     "project_state.json"
   ]
 }

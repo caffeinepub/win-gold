@@ -1,14 +1,14 @@
 # Specification
 
 ## Summary
-**Goal:** Add a simulated OTP verification step to the signup and login flow in `LoginSignup.tsx`.
+**Goal:** Fix the game loading issue in `GamePlay.tsx` where all 6 games get stuck on a loading spinner and never render the actual game UI.
 
 **Planned changes:**
-- After the user enters their mobile number and taps Continue, generate a random 6-digit OTP in React component state and display it in a styled gold info box on screen (e.g., "Your OTP is: XXXXXX — for demo purposes").
-- Render a numeric input field for the user to enter the OTP.
-- Store the OTP and a 5-minute expiry timestamp in React component state only (no backend calls).
-- On correct OTP entry, proceed to name entry (new user) or home screen (returning user), then immediately invalidate the OTP.
-- On incorrect OTP entry, show an inline error message below the input.
-- After 3 failed attempts, invalidate the OTP and prompt the user to restart the flow.
+- Remove or resolve blocking async calls, actor initialization guards, and conditional rendering logic in `GamePlay.tsx` that prevent game screens from rendering.
+- Ensure tapping any game card navigates to the corresponding game play screen and renders it immediately (or within a short deterministic timeout).
+- Implement fallback to local game logic when the backend actor is unavailable or slow to initialize, so the game UI never hangs indefinitely.
+- Verify all 6 games (Dragon vs Tiger, 7 Up Down, Andar Bahar, Ludo, Mines, Crash) render correctly with bet selection, game board/controls, and Play button visible and interactive.
+- Ensure the back/close button on game screens correctly returns the user to the Home screen.
+- Eliminate unhandled promise rejections or console errors related to actor initialization that block game rendering.
 
-**User-visible outcome:** Users must verify a displayed demo OTP before completing signup or login, with clear feedback for wrong codes and automatic lockout after 3 failed attempts.
+**User-visible outcome:** Tapping any game card on the Home screen now navigates to that game's fully interactive play screen within 2 seconds, with no stuck loading spinners regardless of backend availability.

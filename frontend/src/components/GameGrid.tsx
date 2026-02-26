@@ -6,60 +6,68 @@ interface Props {
 
 const MULTIPLAYER_GAMES = [
   {
-    id: 'dragon-vs-tiger',
+    id: 'Dragon vs Tiger',
     name: 'Dragon vs Tiger',
     desc: 'Most Popular',
     image: '/assets/generated/dragon-vs-tiger.dim_400x300.png',
     badge: '🔥 HOT',
     badgeColor: 'bg-red-500',
+    players: '2.4K',
   },
   {
-    id: '7-up-down',
+    id: '7 Up Down',
     name: '7 Up Down',
     desc: 'Dice Game',
     image: '/assets/generated/seven-up-down.dim_400x300.png',
     badge: '🎲 DICE',
     badgeColor: 'bg-blue-600',
+    players: '1.8K',
   },
   {
-    id: 'andar-bahar',
+    id: 'Andar Bahar',
     name: 'Andar Bahar',
     desc: 'Classic Card Game',
     image: '/assets/generated/andar-bahar.dim_400x300.png',
     badge: '🃏 CARDS',
     badgeColor: 'bg-purple-600',
+    players: '3.1K',
   },
 ];
 
 const SKILL_GAMES = [
   {
-    id: 'ludo',
+    id: 'Ludo',
     name: 'Ludo',
     desc: 'Play with Friends',
     image: '/assets/generated/ludo-game.dim_400x300.png',
     badge: '🎯 SKILL',
     badgeColor: 'bg-green-600',
+    players: '5.2K',
   },
   {
-    id: 'mines',
+    id: 'Mines',
     name: 'Mines',
     desc: 'Avoid the Mines',
     image: '/assets/generated/mines-game.dim_400x300.png',
     badge: '💣 MINES',
     badgeColor: 'bg-orange-600',
+    players: '1.2K',
   },
   {
-    id: 'crash',
+    id: 'Crash',
     name: 'Crash',
     desc: 'Cash Out in Time',
     image: '/assets/generated/crash-game.dim_400x300.png',
     badge: '🚀 CRASH',
     badgeColor: 'bg-pink-600',
+    players: '987',
   },
 ];
 
+type GameItem = typeof MULTIPLAYER_GAMES[0];
+
 interface GameCardProps {
-  game: typeof MULTIPLAYER_GAMES[0];
+  game: GameItem;
   onClick: () => void;
 }
 
@@ -78,6 +86,9 @@ function GameCard({ game, onClick }: GameCardProps) {
         <div className="absolute inset-0 bg-gradient-to-t from-navy-900/80 to-transparent" />
         <span className={`absolute top-2 right-2 text-xs font-bold px-2 py-0.5 rounded-full text-white ${game.badgeColor}`}>
           {game.badge}
+        </span>
+        <span className="absolute top-2 left-2 bg-black/60 text-white text-xs px-2 py-0.5 rounded-full">
+          👥 {game.players}
         </span>
       </div>
       <div className="p-3">

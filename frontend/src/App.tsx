@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useInternetIdentity } from './hooks/useInternetIdentity';
 import { useActor } from './hooks/useActor';
 import LoginSignup from './components/LoginSignup';
@@ -31,6 +31,32 @@ export default function App() {
   const [appUser, setAppUser] = useState<AppUser | null>(null);
   const [isCheckingProfile, setIsCheckingProfile] = useState(false);
   const [profileChecked, setProfileChecked] = useState(false);
+  // Timeout guard: after 5s, stop blocking on loading
+  const [loadingTimedOut, setLoadingTimedOut] = useState(false);
+  const loadingTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Start a 5-second timeout when we enter a loading state
+  useEffect(() => {
+    const shouldBeLoading = isInitializing || actorFetching || isCheckingProfile;
+    if (shouldBeLoading && !loadingTimedOut) {
+      if (!loadingTimerRef.current) {
+        loadingTimerRef.current = setTimeout(() => {
+          setLoadingTimedOut(true);
+          setIsCheckingProfile(false);
+          setProfileChecked(true);
+        }, 5000);
+      }
+    } else {
+      // Clear timer if loading resolved
+      if (loadingTimerRef.current) {
+        clearTimeout(loadingTimerRef.current);
+        loadingTimerRef.current = null;
+      }
+    }
+    return () => {
+      // cleanup on unmount only
+    };
+  }, [isInitializing, actorFetching, isCheckingProfile, loadingTimedOut]);
 
   // Check if user has a profile when actor is ready
   useEffect(() => {
@@ -71,6 +97,11 @@ export default function App() {
   useEffect(() => {
     setProfileChecked(false);
     setAppUser(null);
+    setLoadingTimedOut(false);
+    if (loadingTimerRef.current) {
+      clearTimeout(loadingTimerRef.current);
+      loadingTimerRef.current = null;
+    }
   }, [identity?.getPrincipal().toString()]);
 
   const handleLoginSuccess = (user: AppUser) => {
@@ -81,6 +112,7 @@ export default function App() {
   const handleLogout = () => {
     setAppUser(null);
     setProfileChecked(false);
+    setLoadingTimedOut(false);
     setCurrentPage('home');
   };
 
@@ -105,7 +137,8 @@ export default function App() {
     }
   };
 
-  const isLoading = isInitializing || actorFetching || isCheckingProfile;
+  // Only block on loading if we haven't timed out yet
+  const isLoading = !loadingTimedOut && (isInitializing || actorFetching || isCheckingProfile);
 
   if (isLoading) {
     return (
